@@ -13,5 +13,3 @@ services:
         sync: false
       - key: AIML_API_URL
         value: https://api.aimlapi.com/v1
-      - key: PORT
-        value: 3000

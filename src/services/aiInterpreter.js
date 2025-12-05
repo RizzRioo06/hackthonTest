@@ -6,6 +6,10 @@ import axios from 'axios';
  */
 export class AIInterpreterService {
   constructor(apiKey, apiUrl) {
+    if (!apiKey) {
+      throw new Error('AIML_API_KEY is required but not provided');
+    }
+    
     this.apiKey = apiKey;
     this.apiUrl = apiUrl || 'https://api.aimlapi.com/v1';
     this.client = axios.create({

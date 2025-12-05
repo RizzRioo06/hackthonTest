@@ -168,12 +168,35 @@ app.get('/api/market-data/:city', async (req, res) => {
   });
 });
 
+// Debug endpoint - shows environment configuration (without exposing full API key)
+app.get('/api/debug', (req, res) => {
+  const apiKey = process.env.AIML_API_KEY;
+  res.json({
+    nodeEnv: process.env.NODE_ENV,
+    port: process.env.PORT || PORT,
+    apiKeyConfigured: !!apiKey,
+    apiKeyLength: apiKey ? apiKey.length : 0,
+    apiKeyPrefix: apiKey ? apiKey.substring(0, 8) + '...' : 'NOT SET',
+    apiUrl: process.env.AIML_API_URL,
+    interpreterInitialized: !!interpreter,
+    allEnvVars: Object.keys(process.env).filter(key => 
+      key.includes('AIML') || key.includes('NODE') || key.includes('PORT')
+    )
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🌐 AI 3-Way Interpreter Server running on port ${PORT}`);
   console.log(`📊 API Endpoint: http://localhost:${PORT}/api/interpret`);
   console.log(`💰 Price Analysis: http://localhost:${PORT}/api/analyze-price`);
   console.log(`🏠 Market Data: http://localhost:${PORT}/api/market-data/:city`);
+  console.log(`🔍 Debug Info: http://localhost:${PORT}/api/debug`);
+  console.log(`\n🔑 Environment Check:`);
+  console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'not set'}`);
+  console.log(`   AIML_API_KEY: ${process.env.AIML_API_KEY ? '✅ SET (length: ' + process.env.AIML_API_KEY.length + ')' : '❌ NOT SET'}`);
+  console.log(`   AIML_API_URL: ${process.env.AIML_API_URL || 'using default'}`);
+  console.log(`   Interpreter: ${interpreter ? '✅ Initialized' : '❌ Failed'}`);
 });
 
 export default app;

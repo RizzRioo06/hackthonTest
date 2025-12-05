@@ -13,11 +13,23 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+// Check for required environment variables
+if (!process.env.AIML_API_KEY) {
+  console.error('❌ ERROR: AIML_API_KEY is not set in environment variables!');
+  console.error('Please set AIML_API_KEY in Render dashboard or .env file');
+}
+
 // Initialize AI Interpreter
-const interpreter = new InterpretationEngine(
-  process.env.AIML_API_KEY,
-  process.env.AIML_API_URL
-);
+let interpreter = null;
+try {
+  interpreter = new InterpretationEngine(
+    process.env.AIML_API_KEY,
+    process.env.AIML_API_URL || 'https://api.aimlapi.com/v1'
+  );
+  console.log('✅ AI Interpreter initialized successfully');
+} catch (error) {
+  console.error('❌ Failed to initialize AI Interpreter:', error.message);
+}
 
 /**
  * Health check endpoint
@@ -26,7 +38,8 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'healthy', 
     service: 'AI 3-Way Professional Interpreter',
-    version: '1.0.0'
+    version: '1.0.0',
+    apiKeyConfigured: !!process.env.AIML_API_KEY
   });
 });
 
@@ -50,6 +63,14 @@ app.get('/api/health', (req, res) => {
 app.post('/api/interpret', async (req, res) => {
   try {
     const { message, sender, context } = req.body;
+
+    // Check if interpreter is initialized
+    if (!interpreter) {
+      return res.status(503).json({
+        error: 'Service unavailable',
+        message: 'AI Interpreter not initialized. Please check API key configuration.'
+      });
+    }
 
     // Validate input
     if (!message || !sender) {
@@ -91,6 +112,14 @@ app.post('/api/interpret', async (req, res) => {
 app.post('/api/analyze-price', (req, res) => {
   try {
     const { price, city, propertyType } = req.body;
+
+    // Check if interpreter is initialized
+    if (!interpreter) {
+      return res.status(503).json({
+        error: 'Service unavailable',
+        message: 'AI Interpreter not initialized. Please check API key configuration.'
+      });
+    }
 
     if (!price || !city) {
       return res.status(400).json({

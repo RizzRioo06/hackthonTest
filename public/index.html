@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌐 AI 3-Way Professional Interpreter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🌐 AI 3-Way Professional Interpreter</h1>
+            <p class="subtitle">Diplomatic translation with price intelligence for Thai rental market</p>
+            
+            <!-- Context Configuration -->
+            
+        </header>
+
+        <!-- Main 3-Column Layout -->
+        <div class="three-column-layout">
+            <!-- Guest Column -->
+            <div class="column guest-column">
+                <div class="column-header">
+                    <h2>👤 Guest</h2>
+                    <span class="language-tag">English</span>
+                </div>
+                <div class="messages" id="guestMessages"></div>
+                <div class="input-area">
+                    <textarea id="guestInput" placeholder="Type your message as the guest..." rows="3"></textarea>
+                    <button id="guestSend" class="btn btn-primary">Send as Guest</button>
+                </div>
+            </div>
+
+            <!-- AI Interpreter Column -->
+            <div class="column interpreter-column">
+                <div class="column-header">
+                    <h2>🤖 AI Interpreter</h2>
+                    <span class="status-badge">Active</span>
+                </div>
+                <div class="messages" id="interpreterMessages">
+                    <div class="welcome-message">
+                        <p>👋 Welcome! I'm your professional interpreter.</p>
+                        <p>I will:</p>
+                        <ul>
+                            <li>🛡️ Filter offensive language diplomatically</li>
+                            <li>💰 Analyze rental prices against market data</li>
+                            <li>💡 Provide smart cultural advice</li>
+                            <li>🎯 Suggest appropriate responses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Landlord Column -->
+            <div class="column landlord-column">
+                <div class="column-header">
+                    <h2>🏠 Landlord</h2>
+                    <span class="language-tag">ไทย / Thai</span>
+                </div>
+                <div class="messages" id="landlordMessages"></div>
+                <div class="input-area">
+                    <textarea id="landlordInput" placeholder="Type your message as the landlord (Thai or English)..." rows="3"></textarea>
+                    <button id="landlordSend" class="btn btn-primary">Send as Landlord</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Examples -->
+        <div class="demo-section">
+            <h3>📚 Try These Examples:</h3>
+            <div class="demo-buttons">
+                <button class="demo-btn" data-sender="guest" data-message="fuck you, I've been waiting 3 days for the AC to be fixed!">
+                    Angry Guest (Offensive)
+                </button>
+                <button class="demo-btn" data-sender="landlord" data-message="ค่าเช่า 8000 บาทต่อเดือนครับ">
+                    Landlord Price Quote (Thai)
+                </button>
+                <button class="demo-btn" data-sender="guest" data-message="How much for 3 months if I pay upfront?">
+                    Price Negotiation
+                </button>
+                <button class="demo-btn" data-sender="landlord" data-message="ขอโทษครับ ช่างจะมาพรุ่งนี้เช้าครับ">
+                    Landlord Apology (Thai)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

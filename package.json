@@ -1,0 +1,28 @@
+{
+  "name": "ai-3way-interpreter",
+  "version": "1.0.0",
+  "description": "AI 3-Way Professional Interpreter - Diplomatic translation with price intelligence for Thai rental market",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "interpreter",
+    "translation",
+    "thai",
+    "rental",
+    "ai",
+    "diplomatic"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2"
+  }
+}
